@@ -36,27 +36,40 @@
             };
         },
         computed: {
+            isUserAuthentificated() {
+                return this.$store.getters.isUserAuthentificated;
+            },
             menuItems() {
+                if (this.isUserAuthentificated) {
+                    return [
+                        {
+                            icon: 'visibility',
+                            title: 'Статьи',
+                            route: '/articles',
+                        },
+                        {
+                            icon: 'extension',
+                            title: 'Учить слова',
+                            route: '/words',
+                        },
+                        {
+                            icon: 'account_circle',
+                            title: 'Мой профиль',
+                            route: '/profile',
+                        },
+                        {
+                            icon: 'exit_to_app',
+                            title: 'Выйти',
+                            route: '/sign_out',
+                        },
+                    ];
+                }
+
                 return [
                     {
                         icon: 'visibility',
                         title: 'Статьи',
                         route: '/articles',
-                    },
-                    {
-                        icon: 'extension',
-                        title: 'Учить слова',
-                        route: '/words',
-                    },
-                    {
-                        icon: 'account_circle',
-                        title: 'Мой профиль',
-                        route: '/profile',
-                    },
-                    {
-                        icon: 'exit_to_app',
-                        title: 'Выйти',
-                        route: '/sign_out',
                     },
                     {
                         icon: 'input',

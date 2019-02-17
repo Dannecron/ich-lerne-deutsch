@@ -22,3 +22,5 @@ yarn-error.log*
 
 docker-compose.override.yml
 vue.config.js
+
+src/config/firebase.js

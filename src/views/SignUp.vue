@@ -15,7 +15,7 @@
                     {{error}}
                 </v-alert>
 
-                <v-form>
+                <v-form id="sign-up-form" v-model="isValid" @submit.prevent="signUp">
                     <v-text-field 
                         prepend-icon="person"
                         v-model="email"
@@ -23,6 +23,7 @@
                         label="Email"
                         type="email"
                         required
+                        :rules="emailRules"
                     >
                     </v-text-field>
 
@@ -34,13 +35,14 @@
                         id="password"
                         type="password"
                         required
+                        :rules="passwordRules"
                     >
                     </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.prevent="signUp" :disabled="isProcessing">Зарегистрироваться</v-btn>
+                <v-btn type="submit" color="primary" form="sign-up-form" :disabled="isProcessing || !isValid">Зарегистрироваться</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -55,6 +57,15 @@
             return {
                 email: null,
                 password: null,
+                isValid: false,
+                emailRules: [
+                    (value) => !!value || 'Пожалуйста, введите email',
+                    (value) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
+                ],
+                passwordRules: [
+                    (value) => !!value || 'Пожалуйста введите пароль',
+                    (value) => (value && value.length >= 6) || 'Пароль слишком короткий - минимум 6 символов',
+                ],
             };
         },
         computed: {

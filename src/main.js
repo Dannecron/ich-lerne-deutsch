@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import firebase from 'firebase';
+import VuetifyConfirm from 'vuetify-confirm';
 
 import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
@@ -14,6 +15,11 @@ firebase.initializeApp(firebaseConfig);
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
+Vue.use(VuetifyConfirm, {
+  buttonTrueText: 'Да',
+  buttonFalseText: 'Нет',
+  width: 400,
+});
 
 new Vue({
   router,

@@ -15,7 +15,7 @@
                     {{error}}
                 </v-alert>
 
-                <v-form>
+                <v-form id="sign-in-form" v-model="isValid" @submit.prevent="signIn">
                     <v-text-field 
                         prepend-icon="person"
                         v-model="email"
@@ -23,6 +23,7 @@
                         label="Email"
                         type="email"
                         required
+                        :rules="emailRules"
                     >
                     </v-text-field>
 
@@ -34,13 +35,14 @@
                         id="password"
                         type="password"
                         required
+                        :rules="passwordRules"
                     >
                     </v-text-field>
                 </v-form>
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click.prevent="signIn" :disabled="isProcessing">Войти</v-btn>
+                <v-btn color="primary" type="submit" form="sign-in-form" :disabled="isProcessing || !isValid">Войти</v-btn>
               </v-card-actions>
             </v-card>
           </v-flex>
@@ -55,6 +57,14 @@
             return {
                 email: null,
                 password: null,
+                isValid: false,
+                emailRules: [
+                    (value) => !!value || 'Пожалуйста, введите email',
+                    (value) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
+                ],
+                passwordRules: [
+                    (value) => !!value || 'Пожалуйста введите пароль',
+                ],
             };
         },
         computed: {
@@ -70,7 +80,6 @@
         },
         watch: {
             isUserAuthentificated(val) {
-                console.log(val);
                 if (val === true) {
                     this.$router.push('/');
                 }

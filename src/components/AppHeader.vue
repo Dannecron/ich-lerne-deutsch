@@ -23,6 +23,10 @@
                     <v-icon left v-html="item.icon"></v-icon>
                     {{item.title}}
                 </v-btn>
+                <v-btn flat @click.prevent="signOut" v-if="isUserAuthentificated">
+                    <v-icon left v-html="'exit_to_app'"></v-icon>
+                    Выйти
+                </v-btn>
             </v-toolbar-items>
         </v-toolbar>
     </div>
@@ -34,6 +38,15 @@
             return {
                 drawer: false,
             };
+        },
+        methods: {
+            signOut() {
+                this.$confirm('Вы точно хотите выйти?').then(res => {
+                    if (res) {
+                        this.$store.dispatch('signOut');
+                    }
+                });
+            },
         },
         computed: {
             isUserAuthentificated() {
@@ -56,11 +69,6 @@
                             icon: 'account_circle',
                             title: 'Мой профиль',
                             route: '/profile',
-                        },
-                        {
-                            icon: 'exit_to_app',
-                            title: 'Выйти',
-                            route: '/sign_out',
                         },
                     ];
                 }

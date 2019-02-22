@@ -5,7 +5,7 @@ RUN npm config set cache /opt/pub/.npm
 RUN apk upgrade --update \
     && apk add --no-cache curl yarn git
 
-RUN yarn global add @vue/cli
+RUN yarn global add @vue/cli@3.4.1
 
 ARG WEB_USER_ID=33
 ARG WEB_USER_NAME=www-data

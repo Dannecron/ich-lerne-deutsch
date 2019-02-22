@@ -1,11 +1,17 @@
 <template>
     <div>
-        <h2>Articles</h2>
+        <articles-list>
+
+        </articles-list>
     </div>
 </template>
 
 
 <script>
+    import ArticlesList from '@/components/ArticlesList';
     export default {
+        components: {
+            ArticlesList,
+        },
     };
 </script>

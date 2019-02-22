@@ -60,7 +60,7 @@
                 isValid: false,
                 emailRules: [
                     (value) => !!value || 'Пожалуйста, введите email',
-                    (value) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
+                    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
                 ],
                 passwordRules: [
                     (value) => !!value || 'Пожалуйста введите пароль',

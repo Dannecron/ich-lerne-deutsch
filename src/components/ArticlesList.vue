@@ -23,7 +23,7 @@
 
 
 <script>
-    import ListItem from '@/components/ArticlesListItem';
+    import ListItem from '@/components/Article/Details';
 
     export default {
         data() {

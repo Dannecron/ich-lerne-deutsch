@@ -1,3 +1,1 @@
-const getArticleLevel = levels =>  levels.join('/');
-
-export default getArticleLevel;
+export const getArticleLevel = levels =>  levels.join('/');

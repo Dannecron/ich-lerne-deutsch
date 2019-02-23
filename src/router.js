@@ -24,28 +24,40 @@ export default new Router({
     {
       path: '/articles',
       name: 'articles',
-      component: () => import(/* webpackChunkName: "articles" */ '@/views/Articles.vue'),
+      component: () => import(/* webpackChunkName: "articles/index" */ '@/views/Articles'),
+    },
+    {
+      path: '/articles/:articleId',
+      name: 'article',
+      props: true,
+      component: () => import(/* webpackChunkName: "articles/article" */ '@/views/Article')
+    },
+    {
+      path: '/articles/:articleId/part/:partId',
+      name: 'articlePart',
+      props: true,
+      component: () => import(/* webpackChunkName: "articles/article_part" */ '@/views/ArticlePart')
     },
     {
       path: '/words',
       name: 'words',
-      component: () => import(/* webpackChunkName: "words" */ '@/views/Words.vue'),
+      component: () => import(/* webpackChunkName: "words" */ '@/views/Words'),
     },
     {
       path: '/profile',
       name: 'profile',
-      component: () => import(/* webpackChunkName: "words" */ '@/views/Profile.vue'),
+      component: () => import(/* webpackChunkName: "words" */ '@/views/Profile'),
       beforeEnter: AuthMiddleware,
     },
     {
       path: '/sign_in',
       name: 'signIn',
-      component: () => import(/* webpackChunkName: "sign_in" */ '@/views/SignIn.vue'),
+      component: () => import(/* webpackChunkName: "sign_in" */ '@/views/SignIn'),
     },
     {
       path: '/sign_up',
       name: 'signUp',
-      component: () => import(/* webpackChunkName: "sign_up" */ '@/views/SignUp.vue'),
+      component: () => import(/* webpackChunkName: "sign_up" */ '@/views/SignUp'),
     },
     {
       path: '*',

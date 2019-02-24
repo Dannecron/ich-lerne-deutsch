@@ -26,14 +26,11 @@
     import ListItem from '@/components/Article/Details';
 
     export default {
-        data() {
-            return {
-                levels: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
-
-                searchTerm: null,
-                levelTerm: [],
-            };
-        },
+        data: () => ({
+            levels: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+            searchTerm: null,
+            levelTerm: [],
+        }),
         computed: {
             articles() {
                 return this.$store.getters.getArticles;

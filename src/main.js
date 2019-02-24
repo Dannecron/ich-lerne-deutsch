@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuetify from 'vuetify';
 import firebase from 'firebase/app';
 import VuetifyConfirm from 'vuetify-confirm';
+import VueYouTubeEmbed from 'vue-youtube-embed';
 import 'firebase/auth';
 
 import 'vuetify/dist/vuetify.min.css';
@@ -21,6 +22,7 @@ Vue.use(VuetifyConfirm, {
   buttonFalseText: 'Нет',
   width: 400,
 });
+Vue.use(VueYouTubeEmbed);
 
 new Vue({
   router,

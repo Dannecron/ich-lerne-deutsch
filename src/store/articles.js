@@ -95,18 +95,58 @@ export default {
                 articlePartId: 'asdasdad123',
                 articleTitle: 'Harry Potter und Stein der Weisen - 1',
                 partTitle: 'kapitel 1',
-                youtubeId: 'asdasdad1',
+                youtubeId: 'hHW1oY26kxQ',
                 content: [
                     {
                         sentences: [
                             {
-                                origText: 'Bla',
+                                origText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
                                 transText: 'Бла',
                             },
-                        ]
+                            {
+                                origText: 'Praesent ligula odio, interdum pretium ligula eu, vehicula consequat nulla. Etiam a massa iaculis, aliquet metus sit amet, varius odio',
+                                transText: 'Бла2',
+                            },
+                            {
+                                origText: 'Suspendisse quis mi eget nisl accumsan molestie in vel lorem. Duis ipsum massa, pharetra nec arcu sed, mattis ultricies neque.',
+                                transText: 'Бла3',
+                            },
+                            {
+                                origText: 'Sed lacinia sed justo sit amet porttitor. Etiam nec nisi nibh. Donec dolor lacus, volutpat in pellentesque vel, accumsan ac nisi.',
+                                transText: 'Бла4',
+                            },
+                        ],
+                    },
+                    {
+                        sentences: [
+                            {
+                                origText: 'Etiam magna dui, pulvinar quis finibus malesuada, vulputate non sem. In hendrerit dui sem, a cursus ipsum interdum non.',
+                                transText: 'Фу1',
+                            },
+                            {
+                                origText: 'Curabitur porta sagittis lacus.',
+                                transText: 'Фу2',
+                            },
+                        ],
                     }
                 ],
                 words: [
+                    {
+                        origWord: 'Hallo',
+                        transWord: 'Привет',
+                    },
+                    {
+                        origWord: 'Hallo',
+                        transWord: 'Привет',
+                    },
+                    {
+                        origWord: 'Hallo',
+                        transWord: 'Привет',
+                    },
+                    {
+                        origWord: 'Hallo',
+                        transWord: 'Привет',
+                    },
                     {
                         origWord: 'Hallo',
                         transWord: 'Привет',

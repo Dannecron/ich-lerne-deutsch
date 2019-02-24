@@ -90,7 +90,7 @@
                         route: '/sign_up',
                     },
                 ];
-            }
+            },
         },
     };
 </script>

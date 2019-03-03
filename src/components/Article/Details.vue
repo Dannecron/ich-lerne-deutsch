@@ -4,7 +4,7 @@
             <v-layout row>
                 <v-flex xs4 md3>
                     <v-img
-                        src="https://images-na.ssl-images-amazon.com/images/I/51U6bQbA8oL._SY346_.jpg"
+                        :src="article.imageUrl"
                         v-bind:height="expandDetails ? '150px' : '100px'"
                     >
                     </v-img>
@@ -36,11 +36,11 @@
             <v-layout row>
                 <v-flex xs12>
                     <v-card-actions>
-                        <v-rating v-model="article.rating" color="yellow" readonly dense half-increments></v-rating>
+                        <!-- <v-rating v-model="article.rating" color="yellow" readonly dense half-increments></v-rating>
                         <div class="ml-1">
                             <span>{{ article.rating }}</span>
                             <span>({{ article.ratingsCount }})</span>
-                        </div>
+                        </div> -->
                         <v-spacer></v-spacer>
                         <v-btn v-if="!expandDetails" class="primary" flat :to="{ name: 'article', params: { articleId: article.id } }">
                             Открыть

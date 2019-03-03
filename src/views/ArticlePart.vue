@@ -12,6 +12,7 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import BookPartContent from '@/components/Article/Part/Content';
     import BookPartWords from '@/components/Article/Words';
 
@@ -26,15 +27,25 @@
                 required: true,
             },
         },
-        computed: {
-            part() {
-                return this.$store.getters.getParts.find(part => part.articleId === this.articleId
-                    && part.articlePartId === this.partId);
-            }
-        },
         components: {
             BookPartContent,
             BookPartWords,
         },
+        data: () => ({
+            part: null,
+        }),
+        created() {
+            Vue.$db.collection('articleParts')
+                .where('articleId', '==', this.articleId)
+                .where('articlePartId', '==', this.partId)
+                .get()
+                .then((querySnapshot) => {
+                    const snapDocs = querySnapshot.docs;
+                    if (snapDocs.length > 0) {
+                        this.part = Object.assign({}, snapDocs[0].data());
+                    }
+                })
+                .catch(e => console.error(e));
+        }
     };
 </script>

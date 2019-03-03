@@ -12,6 +12,21 @@ This is project based on [tproger course](https://tproger.ru/video/building-vuej
 yarn install
 ```
 
+### Importing data to firestore
+To achieve this goal we use [node-firestore-import-export library](https://www.npmjs.com/package/node-firestore-import-export).
+1. Create `docker-compose.override.yml` and add this content to it
+```
+version: '3'
+
+services: 
+  app:
+    volumes:
+      - ~/path/to/firebase/credentials.json:/var/www/credentials.json
+    environment: 
+      - GOOGLE_APPLICATION_CREDENTIALS=/var/www/cred.json
+```
+1. Run `docker-compose exec app firestore-import --yes --backupFile /var/www/vue/data/back-up.json`
+
 ### Compiles and hot-reloads for development
 ```
 yarn run serve

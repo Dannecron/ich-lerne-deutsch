@@ -1,0 +1,131 @@
+{
+  "__collections__": {
+    "articles": {
+      "hp1": {
+        "description": "Первая глава первой книги о Гарри Поттере",
+        "level": [
+          "B2",
+          "C1"
+        ],
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/ich-lerne-deutsch-27b7b.appspot.com/o/hp.jpg?alt=media&token=7f11f093-aef3-46cc-b443-823515399913",
+        "youtubePlaylistId": "asdadsadad",
+        "title": "Harry Potter und Stein der Weisen - 1",
+        "parts": [
+          {
+            "title": "kapitel 1",
+            "youtubeId": "bsdasdad1",
+            "id": "k1"
+          },
+          {
+            "youtubeId": "bsdasdad2",
+            "id": "k2",
+            "title": "kapitel 2"
+          },
+          {
+            "title": "kapitel 3",
+            "youtubeId": "bsdasdad3",
+            "id": "k3"
+          }
+        ],
+        "__collections__": {}
+      },
+      "hp2": {
+        "level": [
+          "B1",
+          "B2"
+        ],
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/ich-lerne-deutsch-27b7b.appspot.com/o/hp.jpg?alt=media&token=7f11f093-aef3-46cc-b443-823515399913",
+        "youtubePlaylistId": "asdadsadad234234",
+        "title": "Harry Potter und Stein der Weisen - 2",
+        "parts": [
+          {
+            "youtubeId": "bsdasdad1",
+            "id": "k1",
+            "title": "kapitel 1"
+          }
+        ],
+        "description": "Вторая глава первой книги о Гарри Поттере",
+        "__collections__": {}
+      },
+      "hp3": {
+        "level": ["A2"],
+        "imageUrl": "https://firebasestorage.googleapis.com/v0/b/ich-lerne-deutsch-27b7b.appspot.com/o/hp.jpg?alt=media&token=7f11f093-aef3-46cc-b443-823515399913",
+        "youtubePlaylistId": "asdadsada435346",
+        "title": "Harry Potter und Stein der Weisen - 3",
+        "parts": [
+          {
+            "id": "bsdasdad123",
+            "title": "kapitel 1",
+            "youtubeId": "bsdasdad1"
+          },
+          {
+            "id": "bsdasdad124",
+            "title": "kapitel 2",
+            "youtubeId": "bsdasdad2"
+          },
+          {
+            "id": "bsdasdad125",
+            "title": "kapitel 3",
+            "youtubeId": "bsdasdad3"
+          }
+        ],
+        "description": "Третья глава первой книги о Гарри Поттере",
+        "__collections__": {}
+      }
+    },
+    "articleParts": {
+      "hp1k1": {
+        "content": [
+          {
+            "sentences": [
+              {
+                "origText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "transText": "Бла"
+              },
+              {
+                "origText": "Praesent ligula odio, interdum pretium ligula eu, vehicula consequat nulla. Etiam a massa iaculis, aliquet metus sit amet, varius odio",
+                "transText": "Бла2"
+              },
+              {
+                "transText": "Бла3",
+                "origText": "Suspendisse quis mi eget nisl accumsan molestie in vel lorem. Duis ipsum massa, pharetra nec arcu sed, mattis ultricies neque."
+              },
+              {
+                "origText": "Sed lacinia sed justo sit amet porttitor. Etiam nec nisi nibh. Donec dolor lacus, volutpat in pellentesque vel, accumsan ac nisi.",
+                "transText": "Бла4"
+              }
+            ]
+          },
+          {
+            "sentences": [
+              {
+                "transText": "Фу1",
+                "origText": "Etiam magna dui, pulvinar quis finibus malesuada, vulputate non sem. In hendrerit dui sem, a cursus ipsum interdum non."
+              },
+              {
+                "origText": "Curabitur porta sagittis lacus.",
+                "transText": "Фу2"
+              }
+            ]
+          }
+        ],
+        "articleId": "hp1",
+        "partTitle": "kapitel 1",
+        "words": [
+          {
+            "origWord": "Hallo",
+            "transWord": "Привет"
+          },
+          {
+            "transWord": "Привет",
+            "origWord": "Hallo1"
+          }
+        ],
+        "articlePartId": "k1",
+        "youtubeId": "hHW1oY26kxQ",
+        "articleTitle": "Harry Potter und Stein der Weisen - 1",
+        "__collections__": {}
+      }
+    }
+  }
+}

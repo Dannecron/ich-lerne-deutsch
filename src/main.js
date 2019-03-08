@@ -13,6 +13,7 @@ import App from '@/App.vue';
 import router from '@/router';
 import store from '@/store';
 import firebaseConfig from '@/config/firebase';
+import formattedDate from '@/filters/formattedDate';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -27,6 +28,8 @@ Vue.use(VuetifyConfirm, {
   width: 400,
 });
 Vue.use(VueYouTubeEmbed);
+
+Vue.filter('formattedDate', formattedDate);
 
 new Vue({
   router,

@@ -2,12 +2,23 @@
     <div>
         <v-navigation-drawer absolute temporary app v-model="drawer" class="hidden-md-and-up">
             <v-list>
-                <v-list-tile v-for="(item, i) in menuItems" :key="`drawer-item-${i}`">
+                <v-list-tile v-for="(item, i) in menuItems"
+                    :key="`drawer-item-${i}`"
+                    @click.prevent="changeLocation(item.route)"
+                >
                     <v-list-tile-action>
                         <v-icon left v-html="item.icon"></v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
                             <v-list-tile-title v-text="item.title"></v-list-tile-title> 
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile @click.prevent="signOut" v-if="isUserAuthentificated">
+                    <v-list-tile-action>
+                        <v-icon left v-html="'exit_to_app'"></v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        Выйти
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -47,6 +58,9 @@
                     }
                 });
             },
+            changeLocation(to) {
+                this.$router.push(to);
+            }
         },
         computed: {
             isUserAuthentificated() {

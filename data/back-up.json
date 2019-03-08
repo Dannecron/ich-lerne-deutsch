@@ -125,6 +125,54 @@
         "youtubeId": "hHW1oY26kxQ",
         "articleTitle": "Harry Potter und Stein der Weisen - 1",
         "__collections__": {}
+      },
+      "hp1k2": {
+        "content": [
+          {
+            "sentences": [
+              {
+                "origText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "transText": "Бла-бла"
+              }
+            ]
+          }
+        ],
+        "articleId": "hp1",
+        "partTitle": "kapitel 2",
+        "words": [
+          {
+            "transWord": "Привет",
+            "origWord": "Hallo2"
+          }
+        ],
+        "articlePartId": "k2",
+        "youtubeId": "hHW1oY26kxQ",
+        "articleTitle": "Harry Potter und Stein der Weisen - 2",
+        "__collections__": {}
+      },
+      "hp1k3": {
+        "content": [
+          {
+            "sentences": [
+              {
+                "origText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "transText": "Бла-бла-бла"
+              }
+            ]
+          }
+        ],
+        "articleId": "hp1",
+        "partTitle": "kapitel 3",
+        "words": [
+          {
+            "transWord": "Привет",
+            "origWord": "Hallo3"
+          }
+        ],
+        "articlePartId": "k3",
+        "youtubeId": "hHW1oY26kxQ",
+        "articleTitle": "Harry Potter und Stein der Weisen - 3",
+        "__collections__": {}
       }
     }
   }

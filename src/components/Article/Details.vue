@@ -45,7 +45,17 @@
                         <v-btn v-if="!expandDetails" class="primary" flat :to="{ name: 'article', params: { articleId: article.id } }">
                             Открыть
                         </v-btn>
-                        <v-btn v-if="expandDetails" class="primary" flat>Добавить</v-btn>
+                        <v-btn v-if="expandDetails && canAddArticle(article.id)"
+                            class="primary"
+                            flat
+                            @click="addArticle(article.id)"
+                        >
+                            Добавить
+                        </v-btn>
+                        <div v-if="getUserDataArticle(article.id)" class="ml-2">
+                            <v-icon color="white">work_outline</v-icon>
+                            Добавлено {{ getArticleAddedAt(article.id) | formattedDate }}
+                        </div>
                     </v-card-actions>
                 </v-flex>
             </v-layout>
@@ -54,6 +64,7 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
     import YoutubeButton from '@/components/Article/YoutubeButton';
     import { getArticleLevel, declOfNum } from '@/helpers';
 
@@ -74,9 +85,24 @@
                 const partsCountWord = declOfNum(partsCount, ['часть', 'части', 'частей']);
                 return `${partsCount} ${partsCountWord}`;
             },
+            ...mapGetters(['isUserAuthentificated', 'getProcessing', 'userData']),
         },
         methods: {
-            getArticleLevel: getArticleLevel,
+            getArticleLevel,
+            getUserDataArticle(articleId) {
+                return this.userData.articles[articleId];
+            },
+            canAddArticle(articleId) {
+                const article = this.getUserDataArticle(articleId);
+                return this.isUserAuthentificated && !this.getProcessing && !article;
+            },
+            addArticle(articleId) {
+                this.$store.dispatch('addUserArticle', articleId);
+            },
+            getArticleAddedAt(articleId) {
+                const article = this.getUserDataArticle(articleId);
+                return article.addedAt;
+            }
         },
         components: {
             YoutubeButton,

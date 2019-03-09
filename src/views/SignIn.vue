@@ -17,7 +17,7 @@
 
                 <v-form id="sign-in-form" v-model="isValid" @submit.prevent="signIn">
                     <v-text-field 
-                        prepend-icon="person"
+                        prepend-icon="email"
                         v-model="email"
                         name="login"
                         label="Email"
@@ -52,21 +52,20 @@
 </template>
 
 <script>
+    import { emailRules, passwordRules } from '@/helpers';
+
     export default {
-        data() {
-            return {
-                email: null,
-                password: null,
-                isValid: false,
-                emailRules: [
-                    (value) => !!value || 'Пожалуйста, введите email',
-                    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
-                ],
-                passwordRules: [
-                    (value) => !!value || 'Пожалуйста введите пароль',
-                ],
-            };
+        beforeMount() {
+            this.$store.commit('clearError');
         },
+        data: () => ({
+            email: null,
+            password: null,
+            isValid: false,
+
+            emailRules,
+            passwordRules,
+        }),
         computed: {
             error() {
                 return this.$store.getters.getError;

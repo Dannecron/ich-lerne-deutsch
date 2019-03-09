@@ -8,7 +8,7 @@
                 <v-toolbar-title>Регистрация</v-toolbar-title>
               </v-toolbar>
               <v-card-text>
-                  <v-alert
+                <v-alert
                     :value="error"
                     type="warning"
                 >
@@ -18,6 +18,17 @@
                 <v-form id="sign-up-form" v-model="isValid" @submit.prevent="signUp">
                     <v-text-field 
                         prepend-icon="person"
+                        v-model="name"
+                        name="name"
+                        label="Имя"
+                        type="text"
+                        required
+                        :rules="nameRules"
+                    >
+                    </v-text-field>
+
+                    <v-text-field 
+                        prepend-icon="email"
                         v-model="email"
                         name="login"
                         label="Email"
@@ -52,22 +63,22 @@
 </template>
 
 <script>
+    import { emailRules, passwordRules, nameRules } from '@/helpers';
+
     export default {
-        data() {
-            return {
-                email: null,
-                password: null,
-                isValid: false,
-                emailRules: [
-                    (value) => !!value || 'Пожалуйста, введите email',
-                    (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Неправильный email',
-                ],
-                passwordRules: [
-                    (value) => !!value || 'Пожалуйста введите пароль',
-                    (value) => (value && value.length >= 6) || 'Пароль слишком короткий - минимум 6 символов',
-                ],
-            };
+        beforeMount() {
+            this.$store.commit('clearError');
         },
+        data: () => ({
+            email: null,
+            password: null,
+            name: null,
+            isValid: false,
+
+            emailRules,
+            passwordRules,
+            nameRules,
+        }),
         computed: {
             error() {
                 return this.$store.getters.getError;
@@ -88,8 +99,8 @@
         },
         methods: {
             signUp() {
-                const { email, password } = this;
-                this.$store.dispatch('signUp', { email, password });
+                const { email, password, name } = this;
+                this.$store.dispatch('signUp', { email, password, name });
             },
         },
     }

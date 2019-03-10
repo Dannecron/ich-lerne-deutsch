@@ -12,9 +12,9 @@ export default {
         },
     },
     mutations: {
-        setUser(state, { id, email}) {
+        setUser(state, { uid, email }) {
             state.user.isAuthentificated = true;
-            state.user.uid = id;
+            state.user.uid = uid;
             state.user.email = email;
         },
         unSetUser(state) {

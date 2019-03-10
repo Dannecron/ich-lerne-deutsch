@@ -29,12 +29,12 @@ export default {
         }
     },
     actions: {
-        signUp({ commit }, payload) {
-            commit('setProcessing', true);
+        async signUp({ commit }, payload) {
+            await commit('setProcessing', true);
             commit('clearError');
 
             const { email, password, name } = payload;
-            firebase.auth()
+            await firebase.auth()
                 .createUserWithEmailAndPassword(email, password)
                 .then(() => {
                     firebase.auth().currentUser
@@ -42,29 +42,29 @@ export default {
                             displayName: name,
                         })
                         .then(() => commit('setUserName', name));
-                    commit('setProcessing', false);
                 })
                 .catch(function(error) {
                     const { message } = error;
-                    commit('setProcessing', false);
                     commit('setError', message);
                 });
+
+            await commit('setProcessing', false);
         },
-        signIn({ commit }, payload) {
-            commit('setProcessing', true);
+        async signIn({ commit }, payload) {
+            await commit('setProcessing', true);
             commit('clearError');
 
             const { email, password } = payload;
-            firebase.auth()
+            await firebase.auth()
                 .signInWithEmailAndPassword(email, password)
                 .then(() => {
-                    commit('setProcessing', false);
                 })
                 .catch(function(error) {
                     const { message } = error;
-                    commit('setProcessing', false);
                     commit('setError', message);
                 });
+
+            await commit('setProcessing', false);
         },
         signOut() {
             firebase.auth().signOut();
@@ -78,14 +78,14 @@ export default {
                 commit('unSetUser');
             }
         },
-        changeUserProfileData({ commit }, payload) {
+        async changeUserProfileData({ commit }, payload) {
             const { email, password } = payload;
             const credential = firebase.auth.EmailAuthProvider.credential(email, password);
 
-            commit('setProcessing', true);
+            await commit('setProcessing', true);
             commit('clearError');
 
-            firebase.auth().currentUser.reauthenticateAndRetrieveDataWithCredential(credential)
+            await firebase.auth().currentUser.reauthenticateAndRetrieveDataWithCredential(credential)
                 .then(() => {
                     const { changeType } = payload;
                     const reauthenticatedUser = firebase.auth().currentUser;
@@ -111,14 +111,13 @@ export default {
 
                     throw Error('invalid change type');
                 })
-                .then(() => commit('setProcessing', false))
                 .catch((e) => {
                     window.console.error(e);
-
                     const { message } = e;
-                    commit('setProcessing', false);
                     commit('setError', message);
                 });
+
+            await commit('setProcessing', false);
         },
     },
     getters: {

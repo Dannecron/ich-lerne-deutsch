@@ -111,16 +111,19 @@
         ],
         "articleId": "hp1",
         "partTitle": "kapitel 1",
-        "words": [
-          {
-            "origWord": "Hallo",
-            "transWord": "Привет"
+        "words": {
+          "diemutter": {
+            "origText": "Mutter",
+            "origPrefix": "die",
+            "transText": "Мама",
+            "type": 1
           },
-          {
-            "transWord": "Привет",
-            "origWord": "Hallo1"
+          "etwasmachen": {
+            "origText": "etwasmachen",
+            "transText": "Что-то делать",
+            "type": 2
           }
-        ],
+        },
         "articlePartId": "k1",
         "youtubeId": "hHW1oY26kxQ",
         "articleTitle": "Harry Potter und Stein der Weisen - 1",
@@ -139,12 +142,13 @@
         ],
         "articleId": "hp1",
         "partTitle": "kapitel 2",
-        "words": [
-          {
-            "transWord": "Привет",
-            "origWord": "Hallo2"
+        "words": {
+          "hallo": {
+            "origText": "Hallo",
+            "transText": "Привет",
+            "type": 1
           }
-        ],
+        },
         "articlePartId": "k2",
         "youtubeId": "hHW1oY26kxQ",
         "articleTitle": "Harry Potter und Stein der Weisen - 2",
@@ -163,12 +167,7 @@
         ],
         "articleId": "hp1",
         "partTitle": "kapitel 3",
-        "words": [
-          {
-            "transWord": "Привет",
-            "origWord": "Hallo3"
-          }
-        ],
+        "words": {},
         "articlePartId": "k3",
         "youtubeId": "hHW1oY26kxQ",
         "articleTitle": "Harry Potter und Stein der Weisen - 3",

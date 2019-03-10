@@ -21,7 +21,7 @@
             </v-flex>
 
             <v-flex xs12 sm10 offset-sm1>
-                <book-part-words :words="part.words"></book-part-words>
+                <book-part-words :data="part.words"></book-part-words>
             </v-flex>
 
             <v-flex xs12 sm10 offset-sm1 class="text-xs-center">
@@ -105,7 +105,7 @@
             storedRating() {
                 const articlePart = this.currentUserArticlePart;
                 return articlePart ? articlePart.rating : 0;
-            }
+            },
         },
         methods: {
             finishWork() {

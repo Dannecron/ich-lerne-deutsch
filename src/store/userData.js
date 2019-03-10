@@ -10,11 +10,11 @@ export default {
         userData: defaultUserData,
     },
     actions: {
-        loadUserData({ commit }, userId) {
-            commit('setProcessing', true);
+        async loadUserData({ commit }, userId) {
+            await commit('setProcessing', true);
 
             let userDataRef = Vue.$db.collection('userData').doc(userId);
-            userDataRef.get()
+            await userDataRef.get()
                 .then((data) => {
                     let userData = data.exists ? data.data() : defaultUserData;
 
@@ -22,14 +22,18 @@ export default {
                         userData.articles = {};
                     }
 
+                    if (!userData.words) {
+                        userData.words = {};
+                    }
+
                     commit('setUserData', userData);
                 })
                 .catch(e => window.console.error(e));
 
-            commit('setProcessing', false);
+            await commit('setProcessing', false);
         },
-        addUserArticle({ commit, getters }, articleId) {
-            commit('setProcessing', true);
+        async addUserArticle({ commit, getters }, articleId) {
+            await commit('setProcessing', true);
 
             const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
             const article = {
@@ -37,7 +41,7 @@ export default {
                 parts: {},
             };
 
-            userDataRef.set({
+            await userDataRef.set({
                 articles: {
                     [articleId]: article,
                 }
@@ -45,7 +49,45 @@ export default {
                 .then(() => commit('addUserArticle', { articleId, article }))
                 .catch(e => window.console.error(e));
 
-            commit('setProcessing', false);
+            await commit('setProcessing', false);
+        },
+        async addUserWord({ commit, getters }, wordEntity) {
+            await commit('setProcessing', true);
+            
+            const { key, ...wordEntityData } = wordEntity;
+
+            const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
+            const word = Object.assign({}, wordEntityData, {
+                addedAt: new Date(),
+                // about this {@see https://en.wikipedia.org/wiki/Leitner_system}
+                bucket: 1,
+                nextShowDate: new Date(),
+            });
+
+            await userDataRef.set({
+                words: {
+                    [key]: word,
+                }
+            }, { merge: true })
+                .then(() => commit('addUserWord', { wordKey: key, word }))
+                .catch(e => window.console.error(e));
+
+            await commit('setProcessing', false);
+        },
+        async finishUserArticlePart({ commit, getters }, { articleId, partId, rating }) {
+            await commit('setProcessing', true);
+
+            const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
+            const timestamp = new Date();
+
+            await userDataRef.update({
+                [`articles.${articleId}.parts.${partId}.finishedAt`]: timestamp,
+                [`articles.${articleId}.parts.${partId}.rating`]: rating,
+            })
+                .then(() => commit('finishUserArticlePart', { articleId, partId, timestamp, rating }))
+                .catch(e => window.console.error(e));
+
+            await commit('setProcessing', false);
         },
         updateUserArticlePartStats({ commit, getters }, { articleId, partId }) {
             const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
@@ -66,21 +108,6 @@ export default {
                 .then(() => commit('openUserArticlePart', { articleId, partId, timestamp }))
                 .catch(e => window.console.error(e));
         },
-        finishUserArticlePart({ commit, getters }, { articleId, partId, rating }) {
-            commit('setProcessing', true);
-
-            const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
-            const timestamp = new Date();
-
-            userDataRef.update({
-                [`articles.${articleId}.parts.${partId}.finishedAt`]: timestamp,
-                [`articles.${articleId}.parts.${partId}.rating`]: rating,
-            })
-                .then(() => commit('finishUserArticlePart', { articleId, partId, timestamp, rating }))
-                .catch(e => window.console.error(e));
-
-            commit('setProcessing', false);
-        }
     },
     mutations: {
         setUserData(state, payload) {
@@ -96,6 +123,9 @@ export default {
             }
 
             Vue.set(state.userData.articles[articleId].parts, partId, { addedAt: timestamp });
+        },
+        addUserWord(state, { wordKey, word }) {
+            Vue.set(state.userData.words, wordKey, word);
         },
         openUserArticlePart(state, { articleId, partId, timestamp }) {
             Vue.set(state.userData.articles[articleId].parts[partId], 'lastOpenedAt', timestamp);

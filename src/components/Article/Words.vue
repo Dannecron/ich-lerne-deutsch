@@ -13,40 +13,43 @@
                 slot-scope="props"
                 xs12
                 sm6
-                md4
-                lg3
             >
-                <v-card>
-                    <v-card-title>
-                        <h4>{{ props.item.origWord }}</h4>
-                    </v-card-title>
-                    <v-divider></v-divider>
-                    <v-card-text>
-                        {{ props.item.transWord }}
-                    </v-card-text>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn fab dark small color="primary">
-                            <v-icon class="d-flex" dark>add</v-icon>
-                        </v-btn>
-                    </v-card-actions>
-                </v-card>
+                <word-card :wordEntity="props.item"></word-card>
             </v-flex>
         </v-data-iterator>
     </v-container>
 </template>
 
 <script>
+    import WordCard from '@/components/Article/Word/Card';
+
     export default {
         props: {
-            words: {
-                type: Array,
+            data: {
+                type: Object,
                 required: true,
             },
+        },
+        computed: {
+            userData() {
+                return this.$store.getters.userData;
+            },
+            words() {
+                const words = [];
+
+                for (let property in this.data) {
+                    if (this.data.hasOwnProperty(property)) {
+                        const word = Object.assign({}, this.data[property], { key: property });
+                        words.push(word);
+                    }
+                }
+
+                return words;
+            },
+        },
+        components: {
+            WordCard,
         },
     }
 </script>
 
-<style>
-
-</style>

@@ -16,6 +16,9 @@ logs:
 logs-follow:
 	docker-compose logs --tail 100 -f
 
+sh:
+	docker-compose exec app sh
+
 firestore-import:
 	docker-compose exec app firestore-import --yes --backupFile /var/www/vue/data/back-up.json
  

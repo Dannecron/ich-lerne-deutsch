@@ -52,7 +52,7 @@
 </template>
 
 <script>
-    import { emailRules, passwordRules } from '@/helpers';
+    import { emailRules, passwordRules } from '@/utils';
 
     export default {
         beforeMount() {

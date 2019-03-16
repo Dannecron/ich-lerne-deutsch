@@ -39,7 +39,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import { getFullOriginalWord, WORD_TYPES } from '@/helpers';
+    import { getFullOriginalWord, WORD_TYPES } from '@/utils';
 
     export default {
         props: {

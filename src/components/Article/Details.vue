@@ -66,7 +66,7 @@
 <script>
     import { mapGetters } from 'vuex';
     import YoutubeButton from '@/components/Article/YoutubeButton';
-    import { getArticleLevel, declOfNum } from '@/helpers';
+    import { getArticleLevel, declOfNum } from '@/utils';
 
     export default {
         props: {

@@ -10,10 +10,11 @@ import 'vuetify/dist/vuetify.min.css';
 import 'material-design-icons-iconfont/dist/material-design-icons.css';
 
 import App from '@/App.vue';
-import router from '@/router';
-import store from '@/store';
 import firebaseConfig from '@/config/firebase';
 import formattedDate from '@/filters/formattedDate';
+import router from '@/router';
+import store from '@/store';
+import { setUpEventBus } from '@/utils';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
@@ -30,6 +31,8 @@ Vue.use(VuetifyConfirm, {
 Vue.use(VueYouTubeEmbed);
 
 Vue.filter('formattedDate', formattedDate);
+
+setUpEventBus();
 
 new Vue({
   router,

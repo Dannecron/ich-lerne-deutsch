@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import { EventBus, EVENTS } from '@/utils';
 
 export default {
     state: {
@@ -118,6 +119,7 @@ export default {
                 });
 
             await commit('setProcessing', false);
+            await EventBus.notify(EVENTS.USER.DATA_CHANGED);
         },
     },
     getters: {

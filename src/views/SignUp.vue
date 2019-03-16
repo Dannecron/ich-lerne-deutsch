@@ -63,7 +63,7 @@
 </template>
 
 <script>
-    import { emailRules, passwordRules, nameRules } from '@/helpers';
+    import { emailRules, passwordRules, nameRules } from '@/utils';
 
     export default {
         beforeMount() {

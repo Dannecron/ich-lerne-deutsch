@@ -120,7 +120,7 @@
 
 <script>
     import { mapGetters } from 'vuex';
-    import { emailRules, passwordRules, nameRules } from "@/helpers";
+    import { emailRules, passwordRules, nameRules, EVENTS } from "@/utils";
 
     export default {
         data: () => ({
@@ -161,6 +161,14 @@
                     changeType,
                 });
             },
+        },
+        created() {
+            this.$bus.$on(EVENTS.USER.DATA_CHANGED, () => {
+                this.dialog = false;
+            });
+        },
+        beforeDestroy() {
+            this.$bus.$off(EVENTS.USER.DATA_CHANGED);
         },
     };
 </script>

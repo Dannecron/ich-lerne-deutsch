@@ -9,10 +9,10 @@ import userDataModule from '@/store/userData';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  modules: {
-    articleModule,
-    generalModule,
-    userModule,
-    userDataModule,
-  },
+    modules: {
+        articleModule,
+        generalModule,
+        userModule,
+        userDataModule,
+    },
 });

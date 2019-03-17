@@ -6,10 +6,10 @@
 
 
 <script>
-    import ArticlesList from '@/components/ArticlesList';
-    export default {
-        components: {
-            ArticlesList,
-        },
-    };
+import ArticlesList from '@/components/ArticlesList';
+export default {
+    components: {
+        ArticlesList,
+    },
+};
 </script>

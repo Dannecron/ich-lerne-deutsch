@@ -6,7 +6,7 @@ import { EventBus, EVENTS } from '@/utils';
 export default {
     state: {
         user: {
-            isAuthentificated: false,
+            isAuthenticated: false,
             uid: null,
             email: null,
             name: null,
@@ -14,12 +14,12 @@ export default {
     },
     mutations: {
         setUser(state, { uid, email }) {
-            state.user.isAuthentificated = true;
+            state.user.isAuthenticated = true;
             state.user.uid = uid;
             state.user.email = email;
         },
         unSetUser(state) {
-            state.user.isAuthentificated = false;
+            state.user.isAuthenticated = false;
             state.user.uid = null;
         },
         setUserName(state, name) {
@@ -27,7 +27,7 @@ export default {
         },
         setUserEmail(state, email) {
             Vue.set(state.user, 'email', email);
-        }
+        },
     },
     actions: {
         async signUp({ commit }, payload) {
@@ -94,8 +94,8 @@ export default {
                     if (changeType === 'changeName') {
                         const { newName } = payload;
                         return reauthenticatedUser.updateProfile({
-                                displayName: newName,
-                            })
+                            displayName: newName,
+                        })
                             .then(() => commit('setUserName', newName))
                     }
 
@@ -123,7 +123,7 @@ export default {
         },
     },
     getters: {
-        isUserAuthentificated: state => state.user.isAuthentificated,
+        isUserAuthenticated: state => state.user.isAuthenticated,
         userId: state => state.user.uid,
         userName: state => state.user.name,
         userEmail: state => state.user.email,

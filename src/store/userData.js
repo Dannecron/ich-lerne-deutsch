@@ -44,7 +44,7 @@ export default {
             await userDataRef.set({
                 articles: {
                     [articleId]: article,
-                }
+                },
             }, { merge: true })
                 .then(() => commit('addUserArticle', { articleId, article }))
                 .catch(e => window.console.error(e));
@@ -67,7 +67,7 @@ export default {
             await userDataRef.set({
                 words: {
                     [key]: word,
-                }
+                },
             }, { merge: true })
                 .then(() => commit('addUserWord', { wordKey: key, word }))
                 .catch(e => window.console.error(e));

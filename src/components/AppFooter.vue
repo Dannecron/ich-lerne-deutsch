@@ -10,9 +10,9 @@
 
 
 <script>
-    export default {
-        computed: {
-            year: () => new Date().getFullYear(),
-        },
-    };
+export default {
+    computed: {
+        year: () => new Date().getFullYear(),
+    },
+};
 </script>

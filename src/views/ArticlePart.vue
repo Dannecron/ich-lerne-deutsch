@@ -58,89 +58,89 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import BookPartContent from '@/components/Article/Part/Content';
-    import BookPartWords from '@/components/Article/Words';
+import Vue from 'vue';
+import BookPartContent from '@/components/Article/Part/Content';
+import BookPartWords from '@/components/Article/Words';
 
-    export default {
-        props: {
-            articleId: {
-                type: String,
-                required: true,
-            },
-            partId: {
-                type: String,
-                required: true,
-            },
+export default {
+    props: {
+        articleId: {
+            type: String,
+            required: true,
         },
-        components: {
-            BookPartContent,
-            BookPartWords,
+        partId: {
+            type: String,
+            required: true,
         },
-        computed: {
-            currentUserArticle() {
-                const articles = this.$store.getters.userData.articles;
-                if (!articles) {
-                    return null;
-                }
-                return articles[this.articleId];
-            },
-            currentUserArticlePart() {
-                const article = this.currentUserArticle;
-                if (!article) {
-                    return null;
-                }
-                
-                const articleParts = article.parts;
-                if (!articleParts) {
-                    return null;
-                }
-
-                return articleParts[this.partId];
-            },
-            finishedAt() {
-                const articlePart = this.currentUserArticlePart;
-                return articlePart ? articlePart.finishedAt : null
-            },
-            storedRating() {
-                const articlePart = this.currentUserArticlePart;
-                return articlePart ? articlePart.rating : 0;
-            },
-        },
-        methods: {
-            finishWork() {
-                this.$store.dispatch('finishUserArticlePart', { 
-                    articleId: this.articleId,
-                    partId: this.partId,
-                    rating: this.rating,
-                });
-                this.finishDialog = false;
+    },
+    data: () => ({
+        part: null,
+        finishDialog: false,
+        rating: 0,
+    }),
+    computed: {
+        currentUserArticle() {
+            const articles = this.$store.getters.userData.articles;
+            if (!articles) {
+                return null;
             }
+            return articles[this.articleId];
         },
-        data: () => ({
-            part: null,
-            finishDialog: false,
-            rating: 0,
-        }),
-        created() {
-            const { articleId, partId } = this;
-            Vue.$db.collection('articleParts')
-                .where('articleId', '==', articleId)
-                .where('articlePartId', '==', partId)
-                .get()
-                .then((querySnapshot) => {
-                    const snapDocs = querySnapshot.docs;
-                    if (snapDocs.length > 0) {
-                        this.part = Object.assign({}, snapDocs[0].data());
-                    }
-                })
-                .then(() => {
-                    this.$store.dispatch('updateUserArticlePartStats', {
-                        articleId,
-                        partId,
-                    });
-                })
-                .catch(e => window.console.error(e));
-        }
-    };
+        currentUserArticlePart() {
+            const article = this.currentUserArticle;
+            if (!article) {
+                return null;
+            }
+
+            const articleParts = article.parts;
+            if (!articleParts) {
+                return null;
+            }
+
+            return articleParts[this.partId];
+        },
+        finishedAt() {
+            const articlePart = this.currentUserArticlePart;
+            return articlePart ? articlePart.finishedAt : null
+        },
+        storedRating() {
+            const articlePart = this.currentUserArticlePart;
+            return articlePart ? articlePart.rating : 0;
+        },
+    },
+    methods: {
+        finishWork() {
+            this.$store.dispatch('finishUserArticlePart', {
+                articleId: this.articleId,
+                partId: this.partId,
+                rating: this.rating,
+            });
+            this.finishDialog = false;
+        },
+    },
+    created() {
+        const { articleId, partId } = this;
+        Vue.$db.collection('articleParts')
+            .where('articleId', '==', articleId)
+            .where('articlePartId', '==', partId)
+            .get()
+            .then((querySnapshot) => {
+                const snapDocs = querySnapshot.docs;
+                if (snapDocs.length > 0) {
+                    this.part = { ...snapDocs[0].data() };
+                }
+            })
+            .then(() => {
+                this.$store.dispatch('updateUserArticlePartStats', {
+                    articleId,
+                    partId,
+                });
+            })
+            .catch(e => window.console.error(e));
+    },
+    components: {
+        BookPartContent,
+        BookPartWords,
+    },
+};
 </script>

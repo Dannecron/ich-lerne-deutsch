@@ -13,24 +13,24 @@
 
 
 <script>
-    import ArticleDetails from '@/components/Article/Details';
-    import ArticlePartsListItem from '@/components/Article/Part/ListItem';
+import ArticleDetails from '@/components/Article/Details';
+import ArticlePartsListItem from '@/components/Article/Part/ListItem';
 
-    export default {
-        props: {
-            articleId: {
-                type: String,
-                required: true,
-            },
+export default {
+    props: {
+        articleId: {
+            type: String,
+            required: true,
         },
-        computed: {
-            article() {
-                return this.$store.getters.getArticles.find(article => article.id == this.articleId);
-            },
+    },
+    computed: {
+        article() {
+            return this.$store.getters.getArticles.find(article => article.id === this.articleId);
         },
-        components: {
-            ArticleDetails,
-            ArticlePartsListItem,
-        },
-    };
+    },
+    components: {
+        ArticleDetails,
+        ArticlePartsListItem,
+    },
+};
 </script>

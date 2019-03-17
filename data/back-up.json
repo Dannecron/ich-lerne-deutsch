@@ -57,16 +57,6 @@
             "id": "bsdasdad123",
             "title": "kapitel 1",
             "youtubeId": "bsdasdad1"
-          },
-          {
-            "id": "bsdasdad124",
-            "title": "kapitel 2",
-            "youtubeId": "bsdasdad2"
-          },
-          {
-            "id": "bsdasdad125",
-            "title": "kapitel 3",
-            "youtubeId": "bsdasdad3"
           }
         ],
         "description": "Третья глава первой книги о Гарри Поттере",
@@ -151,7 +141,7 @@
         },
         "articlePartId": "k2",
         "youtubeId": "hHW1oY26kxQ",
-        "articleTitle": "Harry Potter und Stein der Weisen - 2",
+        "articleTitle": "Harry Potter und Stein der Weisen - 1",
         "__collections__": {}
       },
       "hp1k3": {
@@ -170,7 +160,26 @@
         "words": {},
         "articlePartId": "k3",
         "youtubeId": "hHW1oY26kxQ",
-        "articleTitle": "Harry Potter und Stein der Weisen - 3",
+        "articleTitle": "Harry Potter und Stein der Weisen - 1",
+        "__collections__": {}
+      },
+      "hp2k1": {
+        "content": [
+          {
+            "sentences": [
+              {
+                "origText": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                "transText": "Бла21-бла-бла"
+              }
+            ]
+          }
+        ],
+        "articleId": "hp2",
+        "partTitle": "kapitel 1",
+        "words": {},
+        "articlePartId": "k1",
+        "youtubeId": "hHW1oY26kxQ",
+        "articleTitle": "Harry Potter und Stein der Weisen - 2",
         "__collections__": {}
       }
     }

@@ -34,57 +34,57 @@
                 {{ snackbar.text }}
             </v-snackbar>
         </v-card-actions>
-    </v-card>    
+    </v-card>
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { getFullOriginalWord, WORD_TYPES } from '@/utils';
+import { mapGetters } from 'vuex';
+import { getFullOriginalWord, WORD_TYPES } from '@/utils';
 
-    export default {
-        props: {
-            wordEntity: {
-                type: Object,
-                required: true,
-            },
+export default {
+    props: {
+        wordEntity: {
+            type: Object,
+            required: true,
         },
-        data: () => ({
-            snackbar: {
-                isEnabled: false,
-                text: null,
-            },
-        }),
-        computed: {
-            ...mapGetters(['userData', 'getProcessing']),
-            isWord() {
-                return this.wordEntity.type === WORD_TYPES.WORD;
-            },
-            isRedewndung() {
-                return this.wordEntity.type === WORD_TYPES.REDEWNNDUNG;
-            },
-            isProcessing() {
-                return this.getProcessing;
-            },
+    },
+    data: () => ({
+        snackbar: {
+            isEnabled: false,
+            text: null,
         },
-        methods: {
-            getFullOriginalWord,
-            addWord(entity) {
-                const userWords = this.userData.words;
-                const wordAdded = userWords[entity.key];
-                if (wordAdded) {
-                    this.snackbar.isEnabled = true;
-                    this.snackbar.text = 'Слово уже было добавлено';
-                    return;
-                }
+    }),
+    computed: {
+        ...mapGetters(['userData', 'getProcessing']),
+        isWord() {
+            return this.wordEntity.type === WORD_TYPES.WORD;
+        },
+        isRedewndung() {
+            return this.wordEntity.type === WORD_TYPES.REDEWNNDUNG;
+        },
+        isProcessing() {
+            return this.getProcessing;
+        },
+    },
+    methods: {
+        getFullOriginalWord,
+        addWord(entity) {
+            const userWords = this.userData.words;
+            const wordAdded = userWords[entity.key];
+            if (wordAdded) {
+                this.snackbar.isEnabled = true;
+                this.snackbar.text = 'Слово уже было добавлено';
+                return;
+            }
 
-                if (Object.keys(userWords).length > 100) {
-                    this.snackbar.isEnabled = true;
-                    this.snackbar.text = 'Слишком много добавленных слов';
-                    return;
-                }
+            if (Object.keys(userWords).length > 100) {
+                this.snackbar.isEnabled = true;
+                this.snackbar.text = 'Слишком много добавленных слов';
+                return;
+            }
 
-                this.$store.dispatch('addUserWord', entity);
-            },
+            this.$store.dispatch('addUserWord', entity);
         },
-    };
+    },
+};
 </script>

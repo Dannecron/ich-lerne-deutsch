@@ -28,17 +28,17 @@
 
 
 <script>
-    import UserProfileData from '@/components/User/ProfileData';
+import UserProfileData from '@/components/User/ProfileData';
 
-    export default {
-        beforeMount() {
-            this.$store.commit('clearError');
-        },
-        data: () => ({
-            tabMode: 'myData',
-        }),
-        components: {
-            UserProfileData,
-        },
-    };
+export default {
+    beforeMount() {
+        this.$store.commit('clearError');
+    },
+    data: () => ({
+        tabMode: 'myData',
+    }),
+    components: {
+        UserProfileData,
+    },
+};
 </script>

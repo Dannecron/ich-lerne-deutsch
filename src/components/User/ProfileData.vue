@@ -33,7 +33,7 @@
                     </v-alert>
 
                     <v-form id="edit-profile-form" v-model="isValid" @submit.prevent="changeUserData">
-                        <v-text-field 
+                        <v-text-field
                             prepend-icon="email"
                             v-model="email"
                             name="login"
@@ -63,7 +63,7 @@
                         </v-radio-group>
 
                         <v-text-field
-                            v-if="changeType == 'changeName'"
+                            v-if="changeType === 'changeName'"
                             prepend-icon="person"
                             v-model="newName"
                             name="newName"
@@ -74,8 +74,8 @@
                         >
                         </v-text-field>
 
-                        <v-text-field 
-                            v-if="changeType == 'changeEmail'"
+                        <v-text-field
+                            v-if="changeType === 'changeEmail'"
                             prepend-icon="email"
                             v-model="newEmail"
                             name="newLogin"
@@ -87,7 +87,7 @@
                         </v-text-field>
 
                         <v-text-field
-                            v-if="changeType == 'changePassword'"
+                            v-if="changeType === 'changePassword'"
                             prepend-icon="lock"
                             v-model="newPassword"
                             name="newPassword"
@@ -105,7 +105,7 @@
                     <v-btn color="green darken-1" flat @click="dialog = false">Отмена</v-btn>
                     <v-btn
                         type="submit"
-                        color="green darken-1" 
+                        color="green darken-1"
                         form="edit-profile-form"
                         flat
                         :disabled="getProcessing || !isValid"
@@ -119,56 +119,56 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import { emailRules, passwordRules, nameRules, EVENTS } from "@/utils";
+import { mapGetters } from 'vuex';
+import { emailRules, passwordRules, nameRules, EVENTS } from "@/utils";
 
-    export default {
-        data: () => ({
-            email: null,
-            password: null,
-            newEmail: null,
-            newPassword: null,
-            newName: null,
+export default {
+    data: () => ({
+        email: null,
+        password: null,
+        newEmail: null,
+        newPassword: null,
+        newName: null,
 
-            changeType: 'changeName',
-            dialog: false,
-            isValid: false,
+        changeType: 'changeName',
+        dialog: false,
+        isValid: false,
 
-            emailRules,
-            passwordRules,
-            nameRules
-        }),
-        computed: {
-            ...mapGetters(['userName', 'userEmail', 'getProcessing', 'getError']),
-        },
-        methods: {
-            changeUserData() {
-                const {
-                    email,
-                    password,
-                    newEmail,
-                    newPassword,
-                    newName,
-                    changeType,
-                } = this;
+        emailRules,
+        passwordRules,
+        nameRules,
+    }),
+    computed: {
+        ...mapGetters(['userName', 'userEmail', 'getProcessing', 'getError']),
+    },
+    methods: {
+        changeUserData() {
+            const {
+                email,
+                password,
+                newEmail,
+                newPassword,
+                newName,
+                changeType,
+            } = this;
 
-                this.$store.dispatch('changeUserProfileData', {
-                    email,
-                    password,
-                    newEmail,
-                    newPassword,
-                    newName,
-                    changeType,
-                });
-            },
-        },
-        created() {
-            this.$bus.$on(EVENTS.USER.DATA_CHANGED, () => {
-                this.dialog = false;
+            this.$store.dispatch('changeUserProfileData', {
+                email,
+                password,
+                newEmail,
+                newPassword,
+                newName,
+                changeType,
             });
         },
-        beforeDestroy() {
-            this.$bus.$off(EVENTS.USER.DATA_CHANGED);
-        },
-    };
+    },
+    created() {
+        this.$bus.$on(EVENTS.USER.DATA_CHANGED, () => {
+            this.dialog = false;
+        });
+    },
+    beforeDestroy() {
+        this.$bus.$off(EVENTS.USER.DATA_CHANGED);
+    },
+};
 </script>

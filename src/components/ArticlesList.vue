@@ -23,38 +23,40 @@
 
 
 <script>
-    import ListItem from '@/components/Article/Details';
+import ListItem from '@/components/Article/Details';
 
-    export default {
-        data: () => ({
-            levels: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
-            searchTerm: null,
-            levelTerm: [],
-        }),
-        computed: {
-            articles() {
-                return this.$store.getters.getArticles;
-            },
-            filteredArticles() {
-                const { articles, searchTerm, levelTerm } = this;
-                let filteredArticles = articles
-
-                if (searchTerm) {
-                    filteredArticles = filteredArticles.filter(article => 
-                        article.title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
-                        ||  article.description.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
-                    );
-                }
-
-                if (levelTerm.length) {
-                    filteredArticles = filteredArticles.filter(article => levelTerm.filter(val => article.level.indexOf(val) !== -1).length > 0)
-                }
-
-                return filteredArticles;
-            },
+export default {
+    data: () => ({
+        levels: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
+        searchTerm: null,
+        levelTerm: [],
+    }),
+    computed: {
+        articles() {
+            return this.$store.getters.getArticles;
         },
-        components: {
-            ListItem,
-        }
-    };
+        filteredArticles() {
+            const { articles, searchTerm, levelTerm } = this;
+            let filteredArticles = articles;
+
+            if (searchTerm) {
+                filteredArticles = filteredArticles.filter(article =>
+                    article.title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+                    ||  article.description.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+                );
+            }
+
+            if (levelTerm.length) {
+                filteredArticles = filteredArticles.filter(
+                    article => levelTerm.filter(val => article.level.indexOf(val) !== -1).length > 0
+                );
+            }
+
+            return filteredArticles;
+        },
+    },
+    components: {
+        ListItem,
+    },
+};
 </script>

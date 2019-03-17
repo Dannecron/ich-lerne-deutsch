@@ -25,38 +25,38 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
-    export default {
-        props: {
-            part: {
-                type: Object,
-                required: true,
-            },
-            articleId: {
-                type: String,
-                required: true,
-            },
+export default {
+    props: {
+        part: {
+            type: Object,
+            required: true,
         },
-        computed: {
-            ...mapGetters(['isUserAuthentificated', 'getProcessing', 'userData']),
-            currentUserArticle() {
-                return this.userData.articles[this.articleId];
-            },
-            currentUserArticlePart() {
-                const article = this.currentUserArticle;
-                return article ? article.parts[this.part.id] : null;
-            },
-            isUserArticleAdded() {
-                return this.isUserAuthentificated && !this.getProcessing && !!this.currentUserArticle;
-            },
-            finishedAt() {
-                const { currentUserArticlePart } = this;
-                return currentUserArticlePart ? currentUserArticlePart.finishedAt : null;
-            },
+        articleId: {
+            type: String,
+            required: true,
         },
-        methods: {
+    },
+    computed: {
+        ...mapGetters(['isUserAuthenticated', 'getProcessing', 'userData']),
+        currentUserArticle() {
+            return this.userData.articles[this.articleId];
         },
-    };
+        currentUserArticlePart() {
+            const article = this.currentUserArticle;
+            return article ? article.parts[this.part.id] : null;
+        },
+        isUserArticleAdded() {
+            return this.isUserAuthenticated && !this.getProcessing && !!this.currentUserArticle;
+        },
+        finishedAt() {
+            const { currentUserArticlePart } = this;
+            return currentUserArticlePart ? currentUserArticlePart.finishedAt : null;
+        },
+    },
+    methods: {
+    },
+};
 </script>
 

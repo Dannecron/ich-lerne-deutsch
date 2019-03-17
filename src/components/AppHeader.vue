@@ -10,10 +10,11 @@
                         <v-icon left v-html="item.icon"></v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                            <v-list-tile-title v-text="item.title"></v-list-tile-title> 
+                            <v-list-tile-title v-text="item.title"></v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile @click.prevent="signOut" v-if="isUserAuthentificated">
+
+                <v-list-tile @click.prevent="signOut" v-if="isUserAuthenticated">
                     <v-list-tile-action>
                         <v-icon left v-html="'exit_to_app'"></v-icon>
                     </v-list-tile-action>
@@ -24,7 +25,7 @@
             </v-list>
         </v-navigation-drawer>
         <v-toolbar app dark class="primary">
-            <v-toolbar-side-icon @click.stop="drawer = !drawer;" class="hidden-md-and-up"></v-toolbar-side-icon>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer" class="hidden-md-and-up"></v-toolbar-side-icon>
             <router-link to="/" tag="span" style="cursor: pointer;">
                 <v-toolbar-title v-text="'Dannc Ich Lerne Deutsch'"></v-toolbar-title>
             </router-link>
@@ -32,9 +33,9 @@
             <v-toolbar-items class="hidden-sm-and-down">
                 <v-btn v-for="(item, i) in menuItems" flat :key="`menuitem-${i}`" :to="item.route">
                     <v-icon left v-html="item.icon"></v-icon>
-                    {{item.title}}
+                    {{ item.title }}
                 </v-btn>
-                <v-btn flat @click.prevent="signOut" v-if="isUserAuthentificated">
+                <v-btn flat @click.prevent="signOut" v-if="isUserAuthenticated">
                     <v-icon left v-html="'exit_to_app'"></v-icon>
                     Выйти
                 </v-btn>
@@ -44,49 +45,30 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                drawer: false,
-            };
-        },
-        methods: {
-            signOut() {
-                this.$confirm('Вы точно хотите выйти?').then(res => {
-                    if (res) {
-                        this.$store.dispatch('signOut');
-                    }
-                });
-            },
-            changeLocation(to) {
-                this.$router.push(to);
-            }
-        },
-        computed: {
-            isUserAuthentificated() {
-                return this.$store.getters.isUserAuthentificated;
-            },
-            menuItems() {
-                if (this.isUserAuthentificated) {
-                    return [
-                        {
-                            icon: 'visibility',
-                            title: 'Статьи',
-                            route: '/articles',
-                        },
-                        {
-                            icon: 'extension',
-                            title: 'Учить слова',
-                            route: '/words',
-                        },
-                        {
-                            icon: 'account_circle',
-                            title: 'Мой профиль',
-                            route: '/profile',
-                        },
-                    ];
+export default {
+    data() {
+        return {
+            drawer: false,
+        };
+    },
+    methods: {
+        signOut() {
+            this.$confirm('Вы точно хотите выйти?').then(res => {
+                if (res) {
+                    this.$store.dispatch('signOut');
                 }
-
+            });
+        },
+        changeLocation(to) {
+            this.$router.push(to);
+        },
+    },
+    computed: {
+        isUserAuthenticated() {
+            return this.$store.getters.isUserAuthenticated;
+        },
+        menuItems() {
+            if (this.isUserAuthenticated) {
                 return [
                     {
                         icon: 'visibility',
@@ -94,19 +76,38 @@
                         route: '/articles',
                     },
                     {
-                        icon: 'input',
-                        title: 'Войти',
-                        route: '/sign_in',
+                        icon: 'extension',
+                        title: 'Учить слова',
+                        route: '/words',
                     },
                     {
-                        icon: 'lock_open',
-                        title: 'Регистрация',
-                        route: '/sign_up',
+                        icon: 'account_circle',
+                        title: 'Мой профиль',
+                        route: '/profile',
                     },
                 ];
-            },
+            }
+
+            return [
+                {
+                    icon: 'visibility',
+                    title: 'Статьи',
+                    route: '/articles',
+                },
+                {
+                    icon: 'input',
+                    title: 'Войти',
+                    route: '/sign_in',
+                },
+                {
+                    icon: 'lock_open',
+                    title: 'Регистрация',
+                    route: '/sign_up',
+                },
+            ];
         },
-    };
+    },
+};
 </script>
 
 <style scoped>

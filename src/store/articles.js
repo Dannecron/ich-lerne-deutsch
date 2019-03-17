@@ -22,7 +22,7 @@ export default {
                             parts: parts ? parts.map(part => Object.assign({}, part)) : [],
                         };
                     });
-                    
+
                     commit('setArticles', articles);
                 })
                 .catch(e => console.error(e));

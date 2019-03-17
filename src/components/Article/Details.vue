@@ -36,13 +36,25 @@
             <v-layout row>
                 <v-flex xs12>
                     <v-card-actions>
-                        <!-- <v-rating v-model="article.rating" color="yellow" readonly dense half-increments></v-rating>
+                        <!-- <v-rating
+                            v-model="article.rating"
+                            color="yellow"
+                            readonly
+                            dense
+                            half-increments
+                        >
+                        </v-rating>
                         <div class="ml-1">
                             <span>{{ article.rating }}</span>
                             <span>({{ article.ratingsCount }})</span>
                         </div> -->
                         <v-spacer></v-spacer>
-                        <v-btn v-if="!expandDetails" class="primary" flat :to="{ name: 'article', params: { articleId: article.id } }">
+                        <v-btn
+                            v-if="!expandDetails"
+                            :to="{ name: 'article', params: { articleId: article.id } }"
+                            class="primary"
+                            flat
+                        >
                             Открыть
                         </v-btn>
                         <v-btn v-if="expandDetails && canAddArticle(article.id)"
@@ -64,48 +76,48 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex';
-    import YoutubeButton from '@/components/Article/YoutubeButton';
-    import { getArticleLevel, declOfNum } from '@/utils';
+import { mapGetters } from 'vuex';
+import YoutubeButton from '@/components/Article/YoutubeButton';
+import { getArticleLevel, declOfNum } from '@/utils';
 
-    export default {
-        props: {
-            article: {
-                type: Object,
-                required: true,
-            },
-            expandDetails: {
-                type: Boolean,
-                default: false,
-            },
+export default {
+    props: {
+        article: {
+            type: Object,
+            required: true,
         },
-        computed: {
-            partsDescription() {
-                const partsCount = this.article.parts.length;
-                const partsCountWord = declOfNum(partsCount, ['часть', 'части', 'частей']);
-                return `${partsCount} ${partsCountWord}`;
-            },
-            ...mapGetters(['isUserAuthentificated', 'getProcessing', 'userData']),
+        expandDetails: {
+            type: Boolean,
+            default: false,
         },
-        methods: {
-            getArticleLevel,
-            getUserDataArticle(articleId) {
-                return this.userData.articles[articleId];
-            },
-            canAddArticle(articleId) {
-                const article = this.getUserDataArticle(articleId);
-                return this.isUserAuthentificated && !this.getProcessing && !article;
-            },
-            addArticle(articleId) {
-                this.$store.dispatch('addUserArticle', articleId);
-            },
-            getArticleAddedAt(articleId) {
-                const article = this.getUserDataArticle(articleId);
-                return article.addedAt;
-            }
+    },
+    computed: {
+        partsDescription() {
+            const partsCount = this.article.parts.length;
+            const partsCountWord = declOfNum(partsCount, ['часть', 'части', 'частей']);
+            return `${partsCount} ${partsCountWord}`;
         },
-        components: {
-            YoutubeButton,
+        ...mapGetters(['isUserAuthenticated', 'getProcessing', 'userData']),
+    },
+    methods: {
+        getArticleLevel,
+        getUserDataArticle(articleId) {
+            return this.userData.articles[articleId];
         },
-    };
+        canAddArticle(articleId) {
+            const article = this.getUserDataArticle(articleId);
+            return this.isUserAuthenticated && !this.getProcessing && !article;
+        },
+        addArticle(articleId) {
+            this.$store.dispatch('addUserArticle', articleId);
+        },
+        getArticleAddedAt(articleId) {
+            const article = this.getUserDataArticle(articleId);
+            return article.addedAt;
+        },
+    },
+    components: {
+        YoutubeButton,
+    },
+};
 </script>

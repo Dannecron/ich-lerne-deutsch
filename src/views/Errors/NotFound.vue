@@ -1,22 +1,18 @@
-
 <template>
-  <div>
-    <v-alert
-        :value="true"
-        color="error"
-        icon="warning"
-        outline
-    >
-      Страница, которую вы запросили, не существует.
-    </v-alert>
-  </div>
+    <div>
+        <v-alert
+                :value="true"
+                color="error"
+                icon="warning"
+                outline
+        >
+            Страница, которую вы запросили, не существует.
+        </v-alert>
+    </div>
 </template>
 
 <script>
-
 export default {
-  name: 'notFound',
-  components: {
-  }
-}
+    name: 'notFound',
+};
 </script>

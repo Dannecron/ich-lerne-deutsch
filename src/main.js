@@ -24,9 +24,9 @@ Vue.$db = db;
 
 Vue.use(Vuetify);
 Vue.use(VuetifyConfirm, {
-  buttonTrueText: 'Да',
-  buttonFalseText: 'Нет',
-  width: 400,
+    buttonTrueText: 'Да',
+    buttonFalseText: 'Нет',
+    width: 400,
 });
 Vue.use(VueYouTubeEmbed);
 
@@ -35,14 +35,14 @@ Vue.filter('formattedDate', formattedDate);
 setUpEventBus();
 
 new Vue({
-  router,
-  store,
-  render: h => h(App),
-  created: function onApplicationCreated() {
-    firebase.auth().onAuthStateChanged((user) => {
-      this.$store.dispatch('stateChanged', user);
-    });
+    router,
+    store,
+    render: h => h(App),
+    created: function onApplicationCreated() {
+        firebase.auth().onAuthStateChanged((user) => {
+            this.$store.dispatch('stateChanged', user);
+        });
 
-    this.$store.dispatch('loadArticles');
-  }
+        this.$store.dispatch('loadArticles');
+    },
 }).$mount('#app');

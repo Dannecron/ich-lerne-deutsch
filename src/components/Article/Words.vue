@@ -21,35 +21,35 @@
 </template>
 
 <script>
-    import WordCard from '@/components/Article/Word/Card';
+import WordCard from '@/components/Article/Word/Card';
 
-    export default {
-        props: {
-            data: {
-                type: Object,
-                required: true,
-            },
+export default {
+    props: {
+        data: {
+            type: Object,
+            required: true,
         },
-        computed: {
-            userData() {
-                return this.$store.getters.userData;
-            },
-            words() {
-                const words = [];
+    },
+    computed: {
+        userData() {
+            return this.$store.getters.userData;
+        },
+        words() {
+            const words = [];
 
-                for (let property in this.data) {
-                    if (this.data.hasOwnProperty(property)) {
-                        const word = Object.assign({}, this.data[property], { key: property });
-                        words.push(word);
-                    }
+            for (let property in this.data) {
+                if (this.data.hasOwnProperty(property)) {
+                    const word = Object.assign({}, this.data[property], { key: property });
+                    words.push(word);
                 }
+            }
 
-                return words;
-            },
+            return words;
         },
-        components: {
-            WordCard,
-        },
-    }
+    },
+    components: {
+        WordCard,
+    },
+};
 </script>
 

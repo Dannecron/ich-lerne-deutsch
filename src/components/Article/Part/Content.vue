@@ -38,12 +38,20 @@
                     <v-tab-item :key="'german'">
                         <div v-for="(paragraph, i) in part.content" :key="`paragraph1-${i}`">
                             <span>&nbsp;&nbsp;</span>
-                            <span v-for="(sentence, y) in paragraph.sentences" :key="`paragraph1-sentence${y}`" :style="textStyle">
+                            <span
+                                v-for="(sentence, y) in paragraph.sentences"
+                                :key="`paragraph1-sentence${y}`"
+                                :style="textStyle"
+                            >
                                 <span>
                                     {{ sentence.origText }}
                                 </span>
                                 <v-icon :size="fontSize" @click.prevent="toggleVisibility(i, y)">help</v-icon>
-                                <span class="success--text" style="font-weight:bold;" v-if="getVisibilityFlag(i, y).value">
+                                <span
+                                    v-if="getVisibilityFlag(i, y).value"
+                                    class="success--text"
+                                    style="font-weight:bold;"
+                                >
                                     {{ sentence.transText }}
                                 </span>
                             </span>
@@ -55,7 +63,11 @@
                             <v-layout row wrap v-for="(paragraph, i) in part.content" :key="`paragraph2-${i}`">
                                 <v-flex xs6>
                                     <span>&nbsp;&nbsp;</span>
-                                    <span v-for="(sentence, y) in paragraph.sentences" :key="`paragraph2-sentence-orig${y}`" :style="textStyle">
+                                    <span
+                                        v-for="(sentence, y) in paragraph.sentences"
+                                        :key="`paragraph2-sentence-orig${y}`"
+                                        :style="textStyle"
+                                    >
                                         <span>
                                             {{ sentence.origText }}
                                         </span>
@@ -64,7 +76,11 @@
 
                                 <v-flex xs6>
                                     <span>&nbsp;&nbsp;</span>
-                                    <span v-for="(sentence, y) in paragraph.sentences" :key="`paragraph2-sentence-trans${y}`" :style="textStyle">
+                                    <span
+                                        v-for="(sentence, y) in paragraph.sentences"
+                                        :key="`paragraph2-sentence-trans${y}`"
+                                        :style="textStyle"
+                                    >
                                         <span>
                                             {{ sentence.transText }}
                                         </span>
@@ -76,65 +92,61 @@
                 </v-tabs>
             </div>
        </div>
-   </v-card> 
+   </v-card>
 </template>
 
 <script>
-    export default {
-        props: {
-            part: {
-                type: Object,
-                required: true,
-            },
+export default {
+    props: {
+        part: {
+            type: Object,
+            required: true,
         },
-        data: () => ({
-            tabMode: 'german',
-            visibillityKeys: [],
-            fontSize: 18,
-        }),
-        created() {
-            for (let i = 0; i < this.part.content.length; i++) {
-                for (let y = 0; y < this.part.content[i].sentences.length; y++) {
-                    this.visibillityKeys.push({
-                        key: `${i}${y}`,
-                        value: false,
-                    });
-                }
+    },
+    data: () => ({
+        tabMode: 'german',
+        visibilityKeys: [],
+        fontSize: 18,
+    }),
+    created() {
+        for (let i = 0; i < this.part.content.length; i++) {
+            for (let y = 0; y < this.part.content[i].sentences.length; y++) {
+                this.visibilityKeys.push({
+                    key: `${i}${y}`,
+                    value: false,
+                });
             }
-        },
-        computed: {
-            playerWidth() {
-                if (this.$vuetify.breakpoint.mdAndUp) {
-                    return '640px';
-                }
-
-                return '250px';
-            },
-            playerHeight() {
-                if (this.$vuetify.breakpoint.mdAndUp) {
-                    return '390px';
-                }
-
-                return '190px';
-            },
-            textStyle() {
-                return {
-                    fontSize: `${this.fontSize}px`,
-                };
-            },
-        },
-        methods: {
-            getVisibilityFlag(i, y) {
-                return this.visibillityKeys.find(v => v.key === `${i}${y}`);
-            },
-            toggleVisibility(i, y) {
-                let flag = this.getVisibilityFlag(i, y);
-                flag.value = !flag.value;
-            },
         }
-    };
+    },
+    computed: {
+        playerWidth() {
+            if (this.$vuetify.breakpoint.mdAndUp) {
+                return '640px';
+            }
+
+            return '250px';
+        },
+        playerHeight() {
+            if (this.$vuetify.breakpoint.mdAndUp) {
+                return '390px';
+            }
+
+            return '190px';
+        },
+        textStyle() {
+            return {
+                fontSize: `${this.fontSize}px`,
+            };
+        },
+    },
+    methods: {
+        getVisibilityFlag(i, y) {
+            return this.visibilityKeys.find(v => v.key === `${i}${y}`);
+        },
+        toggleVisibility(i, y) {
+            let flag = this.getVisibilityFlag(i, y);
+            flag.value = !flag.value;
+        },
+    },
+};
 </script>
-
-<style>
-
-</style>

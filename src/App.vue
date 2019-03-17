@@ -1,23 +1,23 @@
 <template>
-  <v-app>
-    <app-header></app-header>
+    <v-app>
+        <app-header></app-header>
 
-    <v-content>
-      <router-view />
-    </v-content>
+        <v-content>
+            <router-view />
+        </v-content>
 
-    <app-footer></app-footer>
-  </v-app>
+        <app-footer></app-footer>
+    </v-app>
 </template>
 
 <script>
-  import AppHeader from '@/components/AppHeader';
-  import AppFooter from '@/components/AppFooter';
+import AppHeader from '@/components/AppHeader';
+import AppFooter from '@/components/AppFooter';
 
-  export default {
+export default {
     components: {
-      AppHeader,
-      AppFooter,
-    }
-  };
+        AppHeader,
+        AppFooter,
+    },
+};
 </script>

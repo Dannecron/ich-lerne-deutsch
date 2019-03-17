@@ -1,4 +1,8 @@
 import Vue from 'vue';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
+
+import { EventBus, EVENTS } from '@/utils';
 
 const defaultUserData = {
     articles: {},
@@ -30,6 +34,7 @@ export default {
                 })
                 .catch(e => window.console.error(e));
 
+            await EventBus.notify(EVENTS.USER.DATA_LOADED);
             await commit('setProcessing', false);
         },
         async addUserArticle({ commit, getters }, articleId) {
@@ -108,6 +113,33 @@ export default {
                 .then(() => commit('openUserArticlePart', { articleId, partId, timestamp }))
                 .catch(e => window.console.error(e));
         },
+        processUserLearnWord({ commit, getters }, wordKey) {
+            const word = getters.userData.words[wordKey];
+
+            const userDataRef = Vue.$db.collection('userData').doc(getters.userId);
+
+            if (word.bucket === 5) {
+                return userDataRef.update({
+                    [`words.${wordKey}`]: firebase.firestore.FieldValue.delete(),
+                })
+                    .then(() => commit('removeUserWord', wordKey))
+                    .then(() => EventBus.notify(EVENTS.USER.WORD_UPDATED, { wordKey }));
+            }
+
+            let nextShowDate = new Date();
+            nextShowDate.setDate((new Date().getDate() + word.bucket * 2));
+            word.nextShowDate = nextShowDate;
+            word.bucket = word.bucket + 1;
+
+            userDataRef.set({
+                words: {
+                    [wordKey]: word,
+                },
+            }, { merge: true })
+                .then(() => commit('updateUserWord', { word, wordKey }))
+                .then(() => EventBus.notify(EVENTS.USER.WORD_UPDATED, { wordKey }));
+
+        },
     },
     mutations: {
         setUserData(state, payload) {
@@ -133,6 +165,12 @@ export default {
         finishUserArticlePart(state, { articleId, partId, timestamp, rating }) {
             Vue.set(state.userData.articles[articleId].parts[partId], 'finishedAt', timestamp);
             Vue.set(state.userData.articles[articleId].parts[partId], 'rating', rating);
+        },
+        removeUserWord(state, wordKey) {
+            Vue.delete(state.userData.words, wordKey);
+        },
+        updateUserWord(state, { word, wordKey }) {
+            Vue.set(state.userData.words, wordKey, word);
         },
     },
     getters: {

@@ -163,12 +163,12 @@ export default {
         },
     },
     created() {
-        this.$bus.$on(EVENTS.USER.DATA_CHANGED, () => {
+        this.$bus.$on(EVENTS.USER.PROFILE_CHANGED, () => {
             this.dialog = false;
         });
     },
     beforeDestroy() {
-        this.$bus.$off(EVENTS.USER.DATA_CHANGED);
+        this.$bus.$off(EVENTS.USER.PROFILE_CHANGED);
     },
 };
 </script>

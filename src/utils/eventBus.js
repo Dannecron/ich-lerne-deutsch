@@ -2,7 +2,9 @@ import Vue from 'vue';
 
 export const EVENTS = {
     USER: {
-        DATA_CHANGED: 'user-profile-data-changed',
+        DATA_LOADED: 'user-data-loaded',
+        PROFILE_CHANGED: 'user-profile-data-changed',
+        WORD_UPDATED: 'user-data-word-updated',
     },
 };
 

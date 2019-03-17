@@ -119,7 +119,7 @@ export default {
                 });
 
             await commit('setProcessing', false);
-            await EventBus.notify(EVENTS.USER.DATA_CHANGED);
+            await EventBus.notify(EVENTS.USER.PROFILE_CHANGED);
         },
     },
     getters: {

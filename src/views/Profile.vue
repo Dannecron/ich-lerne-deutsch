@@ -19,6 +19,7 @@
                     <v-tab-item :key="'myArticles'">
                     </v-tab-item>
                     <v-tab-item :key="'myWords'">
+                        <user-profile-words></user-profile-words>
                     </v-tab-item>
                 </v-tabs>
             </v-flex>
@@ -29,6 +30,7 @@
 
 <script>
 import UserProfileData from '@/components/User/ProfileData';
+import UserProfileWords from '@/components/User/ProfileWords';
 
 export default {
     beforeMount() {
@@ -39,6 +41,7 @@ export default {
     }),
     components: {
         UserProfileData,
+        UserProfileWords,
     },
 };
 </script>

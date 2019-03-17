@@ -1,12 +1,17 @@
-const formattedDate = (value) => {
+export const buildDate = (value) => {
     if (value === null) {
         return null;
     }
     if (value instanceof Date) {
-        return value.toLocaleDateString();
+        return value;
     }
 
-    return value.toDate().toLocaleDateString();
+    return value.toDate();
+}
+
+const formattedDate = (value) => {
+    const buildDate = buildDate(value);
+    return buildDate ? buildDate.toLocaleDateString() : null;
 };
 
 export default formattedDate;

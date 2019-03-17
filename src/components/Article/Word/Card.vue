@@ -2,19 +2,7 @@
     <v-card>
         <v-card-title>
             <div class="headline">
-                <v-tooltip bottom>
-                    <v-avatar v-if="isWord" color="teal" size="45" slot="activator">
-                        <span class="white--text">W</span>
-                    </v-avatar>
-                    <span>Слово / das word</span>
-                </v-tooltip>
-                <v-tooltip bottom>
-                    <v-avatar v-if="isRedewndung" color="indigo" size="45" slot="activator">
-                        <span class="white--text">RW</span>
-                    </v-avatar>
-                    <span>Выражение / die Redewendung</span>
-                </v-tooltip>
-                {{ getFullOriginalWord(wordEntity) }}
+                <original-word :wordEntity="wordEntity"></original-word>
             </div>
         </v-card-title>
 
@@ -39,7 +27,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { getFullOriginalWord, WORD_TYPES } from '@/utils';
+import OriginalWord from '@/components/Article/Word/OriginalWord';
 
 export default {
     props: {
@@ -56,18 +44,11 @@ export default {
     }),
     computed: {
         ...mapGetters(['userData', 'getProcessing']),
-        isWord() {
-            return this.wordEntity.type === WORD_TYPES.WORD;
-        },
-        isRedewndung() {
-            return this.wordEntity.type === WORD_TYPES.REDEWNNDUNG;
-        },
         isProcessing() {
             return this.getProcessing;
         },
     },
     methods: {
-        getFullOriginalWord,
         addWord(entity) {
             const userWords = this.userData.words;
             const wordAdded = userWords[entity.key];
@@ -85,6 +66,9 @@ export default {
 
             this.$store.dispatch('addUserWord', entity);
         },
+    },
+    components: {
+        OriginalWord,
     },
 };
 </script>

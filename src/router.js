@@ -6,15 +6,7 @@ import Home from '@/views/Home';
 
 Vue.use(Router);
 
-function AuthMiddleware(from, to, next) {
-    if (Store.getters.isUserAuthenticated) {
-        next();
-    } else {
-        next('/sign_in');
-    }
-}
-
-export default new Router({
+const router = new Router({
     routes: [
         {
             path: '/',
@@ -47,7 +39,7 @@ export default new Router({
             path: '/profile',
             name: 'profile',
             component: () => import(/* webpackChunkName: "words" */ '@/views/Profile'),
-            beforeEnter: AuthMiddleware,
+            meta: { authRequired: true },
         },
         {
             path: '/sign_in',
@@ -66,3 +58,16 @@ export default new Router({
     ],
     mode: 'history',
 });
+
+router.beforeEach((to, from, next) => {
+    Store.dispatch('initAuth')
+        .then((user) => {
+            if (to.matched.some(route => route.meta.authRequired)) {
+                return user ? next() : next('/sign_in');
+            }
+        
+            return next();
+        })
+})
+
+export default router;

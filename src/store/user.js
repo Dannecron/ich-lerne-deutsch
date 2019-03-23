@@ -11,6 +11,7 @@ export default {
             email: null,
             name: null,
         },
+        unSubscribeAuth: null,
     },
     mutations: {
         setUser(state, { uid, email }) {
@@ -28,8 +29,26 @@ export default {
         setUserEmail(state, email) {
             Vue.set(state.user, 'email', email);
         },
+        setUnSubscribeAuth(state, func) {
+            state.unSubscribeAuth = func;
+        },
     },
     actions: {
+        initAuth({ commit, dispatch, state }) {
+            return new Promise((resolve) => {
+                if (state.unSubscribeAuth) {
+                    state.unSubscribeAuth();
+                }
+
+                const unSubscribe = firebase.auth()
+                    .onAuthStateChanged((user) => {
+                        dispatch('stateChanged', user);
+                        resolve(user);
+                    });
+
+                commit('setUnSubscribeAuth', unSubscribe);
+            })
+        },
         async signUp({ commit }, payload) {
             await commit('setProcessing', true);
             commit('clearError');

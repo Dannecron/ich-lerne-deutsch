@@ -55,7 +55,8 @@ export default {
         signOut() {
             this.$confirm('Вы точно хотите выйти?').then(res => {
                 if (res) {
-                    this.$store.dispatch('signOut');
+                    this.$store.dispatch('signOut')
+                        .then(() => this.changeLocation({ name: 'home' }));
                 }
             });
         },
@@ -110,5 +111,3 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>

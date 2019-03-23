@@ -10,8 +10,8 @@ export const buildDate = (value) => {
 }
 
 const formattedDate = (value) => {
-    const buildDate = buildDate(value);
-    return buildDate ? buildDate.toLocaleDateString() : null;
+    const date = buildDate(value);
+    return date ? date.toLocaleDateString() : null;
 };
 
 export default formattedDate;

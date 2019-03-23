@@ -1,0 +1,29 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAuthenticated() {
+      return request.auth.uid != null;
+    }
+      
+    function isAdmin() {
+      return isAuthenticated()
+        && get(/databases/$(database)/documents/userData/$(request.auth.uid)).data.isAdmin == true;
+    }
+      
+    match /articles/{document=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+      
+    match /articleParts/{document=**} {
+      allow read: if isAuthenticated()
+        && get(/databases/$(database)/documents/userData/$(request.auth.uid))
+          .data
+          .articles[resource.data.articleId] != null;
+      allow write: if isAdmin();
+    }
+      
+    match /userData/{userId} {
+      allow read, write: if isAuthenticated() || isAdmin();
+    }
+  }
+}

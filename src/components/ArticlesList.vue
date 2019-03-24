@@ -1,24 +1,23 @@
 
 <template>
-    <v-container grid-list-md>
-        <v-layout row wrap>
-            <v-flex xs12 sm10 md8 offset-sm1 offset-md2>
-                <v-container fluid>
-                    <v-layout row>
-                        <v-flex md8>
-                            <v-text-field label="Поиск" v-model="searchTerm"></v-text-field>
-                        </v-flex>
-                        <v-flex md4>
-                            <v-select label="Уровень" :items="levels" v-model="levelTerm" multiple></v-select>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-flex>
-            <v-flex v-for="article in filteredArticles" xs12 sm10 md8 offset-sm1 offset-md2 :key="article.id">
-                <list-item :article="article"></list-item>
-            </v-flex>
-        </v-layout>
-    </v-container>
+    <section>
+        <div>
+            <v-container fluid>
+                <v-layout row>
+                    <v-flex md8>
+                        <v-text-field label="Поиск" v-model="searchTerm"></v-text-field>
+                    </v-flex>
+                    <v-flex md4>
+                        <v-select label="Уровень" :items="levels" v-model="levelTerm" multiple></v-select>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </div>
+
+        <div class="mb-3" v-for="article in filteredArticles" :key="article.id">
+            <list-item :article="article"></list-item>
+        </div>
+    </section>
 </template>
 
 
@@ -26,6 +25,12 @@
 import ListItem from '@/components/Article/Details';
 
 export default {
+    props: {
+        userOnly: {
+            type: Boolean,
+            default: false,
+        },
+    },
     data: () => ({
         levels: ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'],
         searchTerm: null,
@@ -38,6 +43,12 @@ export default {
         filteredArticles() {
             const { articles, searchTerm, levelTerm } = this;
             let filteredArticles = articles;
+
+            if (this.userOnly) {
+                filteredArticles = filteredArticles.filter(
+                    article => this.$store.getters.userData.articles[article.id]
+                );
+            }
 
             if (searchTerm) {
                 filteredArticles = filteredArticles.filter(article =>

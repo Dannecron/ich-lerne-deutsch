@@ -71,7 +71,7 @@ export default {
         ...mapGetters(['userData']),
         userWords() {
             return this.userData.words;
-        }
+        },
     },
     methods: {
         setWords() {

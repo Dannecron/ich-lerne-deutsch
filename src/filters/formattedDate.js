@@ -7,7 +7,7 @@ export const buildDate = (value) => {
     }
 
     return value.toDate();
-}
+};
 
 const formattedDate = (value) => {
     const date = buildDate(value);

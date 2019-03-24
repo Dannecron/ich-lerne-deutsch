@@ -77,11 +77,6 @@ export default {
                         route: '/articles',
                     },
                     {
-                        icon: 'extension',
-                        title: 'Учить слова',
-                        route: '/words',
-                    },
-                    {
                         icon: 'account_circle',
                         title: 'Мой профиль',
                         route: '/profile',

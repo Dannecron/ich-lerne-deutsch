@@ -31,11 +31,6 @@ const router = new Router({
             component: () => import(/* webpackChunkName: "articles/article_part" */ '@/views/ArticlePart'),
         },
         {
-            path: '/words',
-            name: 'words',
-            component: () => import(/* webpackChunkName: "words" */ '@/views/Words'),
-        },
-        {
             path: '/profile',
             name: 'profile',
             component: () => import(/* webpackChunkName: "words" */ '@/views/Profile'),
@@ -65,9 +60,9 @@ router.beforeEach((to, from, next) => {
             if (to.matched.some(route => route.meta.authRequired)) {
                 return user ? next() : next('/sign_in');
             }
-        
+
             return next();
         })
-})
+});
 
 export default router;

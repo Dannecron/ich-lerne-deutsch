@@ -6,7 +6,7 @@ RUN apk upgrade --update \
     && apk add --no-cache curl yarn git
 
 RUN yarn global add \
-    @vue/cli@3.4.1 \
+    @vue/cli@3.12.1 \
     node-firestore-import-export
 
 ARG WEB_USER_ID=33
